@@ -1,0 +1,44 @@
+<launch>
+
+	<include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch"/>
+	
+	<node name="pcl_background_segmentation" pkg ="bioloid_pose_estimation" type="pcl_background_segmentation" output="screen" />
+	
+	<node name="pcl_downsampling" pkg ="bioloid_pose_estimation" type="pcl_downsampling" output="screen" />
+	
+	<node name="pcl_filter" pkg ="bioloid_pose_estimation" type="pcl_filter" output="screen" />
+
+	<node name="base_footprint_broadcaster" pkg="bioloid_pose_estimation" type="base_footprint_broadcaster" output="screen"/>
+	
+	<node name="position_estimation" pkg ="bioloid_pose_estimation" type="position_estimation" output="screen" />
+
+	<node name="complementary_filter_node" pkg ="imu_complementary_filter" type="complementary_filter_node" output="screen" >
+		<param name="fixed_frame" value="world_frame"/>
+	</node>
+
+
+	<node name="robot_frame_broadcaster" pkg ="bioloid_pose_estimation" type="robot_frame_broadcaster" output="screen" />
+
+	<node name="position_robot_frame_broadcaster" pkg ="bioloid_pose_estimation" type="position_robot_frame_broadcaster" output="screen" />
+
+	<node name="final_pose_merged" pkg ="bioloid_pose_estimation" type="final_pose_merged" output="screen" />
+
+ 	 
+
+	<!-- parametri delle trasformate da cambiare -->
+	
+<node pkg="tf2_ros"
+        type="static_transform_publisher"
+        name="kin_world_tf"
+	args="0.42 0.25 0.72 0 1.57 1.57 kinect2_ir_optical_frame world_frame" />
+
+	<node pkg="tf2_ros"
+        type="static_transform_publisher"
+        name="position_robot_base_link"
+	args="0 0 0 1.57 0 1.57 position_robot_frame base_link" />
+
+
+
+
+	
+</launch>
