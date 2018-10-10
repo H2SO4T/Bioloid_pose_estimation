@@ -8,7 +8,7 @@ position of a humanoid robot's center of mass and the Yaw-Pitch-Roll angles of t
 and to apply movement policies, allowing the robot to be autonomous.
 
 # Requirements:
-* Linux 16.04
+* Linux Ubuntu 16.04
 * Ros Kinetic
 * Kinect One or equivalent
 * Imu Sensor (phidgets 3/3/3)
